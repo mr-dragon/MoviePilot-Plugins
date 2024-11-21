@@ -119,6 +119,7 @@ class ForwardMsgToQW(_PluginBase):
             {
                 'component': 'VForm',
                 'content': [
+                    # 原有配置保持不变
                     {
                         'component': 'VRow',
                         'content': [
@@ -137,24 +138,16 @@ class ForwardMsgToQW(_PluginBase):
                                         }
                                     }
                                 ]
-                            },
-                            {
-                                'component': 'VCol',
-                                'props': {
-                                    'cols': 12,
-                                    'md': 6
-                                },
-                                'content': [
-                                    {
-                                        'component': 'VSwitch',
-                                        'props': {
-                                            'model': 'add_play_link',
-                                            'label': '添加播放链接',
-                                        }
-                                    }
-                                ]
                             }
                         ]
+                    },
+
+                    # 添加企业微信配置分割线
+                    {
+                        'component': 'VDivider',
+                        'props': {
+                            'class': 'my-4'
+                        }
                     },
                     {
                         'component': 'VRow',
@@ -166,15 +159,54 @@ class ForwardMsgToQW(_PluginBase):
                                 },
                                 'content': [
                                     {
-                                        'component': 'VSelect',
+                                        'component': 'VSubheader',
                                         'props': {
-                                            'multiple': True,
-                                            'chips': True,
-                                            'clearable': True,
-                                            'model': 'mediaservers',
-                                            'label': '媒体服务器',
-                                            'items': [{"title": config.name, "value": config.name}
-                                                      for config in self.mediaserver_helper.get_configs().values()]
+                                            'class': 'text-h6',
+                                        },
+                                        'content': '企业微信配置'
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+
+                    # 企业微信配置项
+                    {
+                        'component': 'VRow',
+                        'content': [
+                            {
+                                'component': 'VCol',
+                                'props': {
+                                    'cols': 12,
+                                    'md': 6
+                                },
+                                'content': [
+                                    {
+                                        'component': 'VTextField',
+                                        'props': {
+                                            'model': 'wecom_corpid',
+                                            'label': '企业ID(CorpID)',
+                                            'placeholder': '请输入企业ID',
+                                            'persistent-placeholder': True,
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                'component': 'VCol',
+                                'props': {
+                                    'cols': 12,
+                                    'md': 6
+                                },
+                                'content': [
+                                    {
+                                        'component': 'VTextField',
+                                        'props': {
+                                            'model': 'wecom_corpsecret',
+                                            'label': '应用Secret',
+                                            'placeholder': '请输入应用Secret',
+                                            'persistent-placeholder': True,
+                                            'type': 'password'
                                         }
                                     }
                                 ]
@@ -188,22 +220,42 @@ class ForwardMsgToQW(_PluginBase):
                                 'component': 'VCol',
                                 'props': {
                                     'cols': 12,
+                                    'md': 6
                                 },
                                 'content': [
                                     {
-                                        'component': 'VSelect',
+                                        'component': 'VTextField',
                                         'props': {
-                                            'chips': True,
-                                            'multiple': True,
-                                            'model': 'types',
-                                            'label': '消息类型',
-                                            'items': types_options
+                                            'model': 'wecom_agentid',
+                                            'label': '应用ID(AgentID)',
+                                            'placeholder': '请输入应用ID',
+                                            'persistent-placeholder': True,
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                'component': 'VCol',
+                                'props': {
+                                    'cols': 12,
+                                    'md': 6
+                                },
+                                'content': [
+                                    {
+                                        'component': 'VTextField',
+                                        'props': {
+                                            'model': 'wecom_touser',
+                                            'label': '接收用户',
+                                            'placeholder': '接收消息的用户，默认@all',
+                                            'persistent-placeholder': True,
                                         }
                                     }
                                 ]
                             }
                         ]
                     },
+
+                    # 添加说明信息
                     {
                         'component': 'VRow',
                         'content': [
@@ -218,13 +270,15 @@ class ForwardMsgToQW(_PluginBase):
                                         'props': {
                                             'type': 'info',
                                             'variant': 'tonal',
-                                            'text': '需要设置媒体服务器Webhook，回调相对路径为 /api/v1/webhook?token=API_TOKEN&source=媒体服务器名（3001端口），其中 API_TOKEN 为设置的 API_TOKEN。'
+                                            'text': '企业微信配置说明：\n1. 需要在企业微信管理后台创建应用\n2. CorpID在"我的企业"页面查看\n3. Secret在应用的详情页面查看\n4. AgentID在应用的详情页面查看\n5. 接收用户默认为@all，也可以指定具体用户ID'
                                         }
                                     }
                                 ]
                             }
                         ]
-                    }
+                    },
+
+                    # ... 其他原有配置 ...
                 ]
             }
         ], {
