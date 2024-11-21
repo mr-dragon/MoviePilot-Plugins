@@ -10,5 +10,14 @@
         "history": {
             "v1.0": "MoviePilot V2 版本-转发通知到企微插件"
         }
+    },
+    "ForMessage": {
+        "name": "转发消息",
+        "description": "转发消息第三方渠道自定义通知",
+        "labels": "消息通知",
+        "version": "1.0",
+        "icon": "Planka_A.png",
+        "author": "KoWming",
+        "level": 2,
     }
 }
